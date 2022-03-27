@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+    <script src="/socket.io/socket.io.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+    <script src="main.js" defer></script>
+    <title>Byte Chat</title>
+</head>
+<body>
+    <div class="signin-container">
+        <div class="signin-card">
+            <h1>Byte Chat</h1>
+            <form id="signin-form" class="signin-form" action="">
+                <input type="text" id="username" class="username" placeholder="Enter a Username" autocomplete="off" min="4">
+                <input type="submit" value="Sign In" id="username-submit">
+            </form>
+        </div>
+    </div>
+    <div class="container">
+        <div class="chat-container">
+            <div class="navigation-panel">
+                <div class="chat-rooms">
+                    <h3 class="room-header"> Chat Rooms:</h3>
+                    <div class="chat-room-scrollpane">
+                        <button class="room-options" id="general" onclick="selectRoom(this.id)">General</button>
+                        <button class="room-options" id="javaScript" onclick="selectRoom(this.id)">JavaScript</button>
+                        <button class="room-options" id="java" onclick="selectRoom(this.id)">Java</button>
+                        <button class="room-options" id="python" onclick="selectRoom(this.id)">Python</button>
+                        <button class="room-options" id="c++" onclick="selectRoom(this.id)">C++</button>
+                        <button class="room-options" id="c#" onclick="selectRoom(this.id)">C#</button>
+                    </div>
+                </div>
+                <div class="room-users">
+                    <h3 class="users-header">Current Room Members:</h3>
+                    <ul class="user-list">
+                        <!-- <label class="room-users-label">Users</label> -->
+                        <li>
+                            <p>Holder #1</p>
+                        </li>
+                        <li>
+                            <p>Holder #2</p>
+                        </li>
+                        <li>
+                            <p>Holder #3</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="chat-panel">
+                <span class="menu-toggle" onclick="toggleNav()">&#9776;</span>
+                <!-- <h2 class="chatroom-header">Chat Room #</h2>
+                <i class="fa-solid fa-user"></i> -->
+                <ul class="message-container" id="message-container">
+                    <li class="sentMessageBubble">
+                        <p class="bubbleName">Everett Lang</p> 
+                        <p class="bubbleMessage">This is a Filler message while I style the css</p>
+                        <p class="bubbleDate">June 23rd 2022</p> 
+                    </li>
+                    <li class="receivedMessageBubble">
+                        <p class="bubbleName">Everett Lang</p> 
+                        <p class="bubbleMessage">This is a Filler message while I style the css</p>
+                        <p class="bubbleDate">June 23rd 2022</p> 
+                    </li>
+                </ul>
+                <form class="chat-form" id="chat-form" action="">
+                    <input type="text" id="chat-box" class="chat-box" autocomplete="off">
+                    <input type="submit" value="Send" id="submit-input" class="submit-input">
+                </form>
+                <!-- <button type="submit" class="submit-input"> <span class="material-icons">send</span> </button> -->
+                
+                <!-- <div class="current-connections">Current Connections</div> -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>
