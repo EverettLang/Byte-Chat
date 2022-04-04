@@ -1,3 +1,6 @@
+ /*
+    Handles Client side responses and posts to server side
+ */
 const socket = io();
 
 const currentConnections = document.querySelector(".current-connections");
@@ -16,19 +19,14 @@ const userList = document.querySelector(".user-list");
 
 let menuOpen = false;
 
-
-
-// var UsersRoom;
 const clientData = {
     username: "",
     room: "",
     socketID: "",
 };
 
-
-
 /*
-    data: username,room
+    Handles room joins for both users in the room and new user joining
 */
 socket.on("user-joined-room", (username, room, roomMemberList) => {
 
@@ -59,6 +57,9 @@ socket.on("user-joined-room", (username, room, roomMemberList) => {
     }    
 });
 
+ /*
+    Handles actions for current room users when another user leaves
+ */
 socket.on("user-left-room", (username, room, roomMemberList) => {
     
         const element = `<li class="join-leave-message"><p>${username} Left ${room}</p></li>`
@@ -74,6 +75,9 @@ socket.on("user-left-room", (username, room, roomMemberList) => {
         });
 });
 
+ /*
+    Displays message when a message is sent from server side.
+ */
 socket.on("receivedMessage", (data) =>{
 
     addMsgToUI(data, false);
@@ -94,6 +98,11 @@ signinForm.addEventListener('submit', (event) => {
     sendSignIn();
 });
 
+
+ /*
+   Helper function for signing in with a username.
+   Pulls inputed data and emits server response
+ */
 function sendSignIn(){
 
     clientData.username = usernameInput.value;
@@ -114,7 +123,7 @@ function sendSignIn(){
 
 
 /*
-    Sending a Chat Message
+    Event listener for sending a message
 */
 chatForm.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -124,9 +133,11 @@ chatForm.addEventListener('submit', (event) => {
 
 
 
-
+ /*
+   Helper function for sending message to server-side for distribution
+ */
 function sendMessage(){
-    console.log("IN THIS BITCH");
+//     console.log("IN THIS");
     const data = {
         username: clientData.username,
         room: clientData.room,
@@ -140,6 +151,9 @@ function sendMessage(){
    
 }
 
+ /*
+    Heler function displays all messages on screen based of own or other users message
+*/
 function addMsgToUI(data, isOwnMessage){
 
     const element = `<li class="${isOwnMessage ? 'sentMessageBubble' : 'receivedMessageBubble'}">
@@ -153,8 +167,8 @@ function addMsgToUI(data, isOwnMessage){
 }
 
 /*
-selectRoom
-
+Helper Function to use side menu to toggle a differnt room
+Intakes new room section
 */
 function selectRoom(newRoom){
 
@@ -174,6 +188,9 @@ function selectRoom(newRoom){
     clientData.room = newRoom;
 }
 
+ /*
+   Toggle navigation menu on menu button press depending on screen size.
+*/
 function toggleNav() {
     
     if(menuOpen){
